@@ -1,0 +1,25 @@
+{
+  "$schema": "./registry.schema.json",
+  "version": "1",
+  "skills": {
+    "skill-base": {
+      "source": "github:ivannikov-pro/skill-base",
+      "description": "How to create, maintain, and distribute AI agent skills. Meta-skill for scaffolding new skills.",
+      "tags": ["meta", "scaffolding", "agentskills"],
+      "version": "1.0.0"
+    },
+    "find-docs": {
+      "source": "github:ivannikov-pro/find-docs-skill",
+      "description": "Documentation lookup via Context7 MCP — retrieves up-to-date docs and code examples for any library.",
+      "tags": ["documentation", "context7", "mcp"],
+      "version": "1.0.0"
+    }
+  },
+  "workflows": {},
+  "mcp": {
+    "ai-notify-tg": {
+      "package": "@ivannikov-pro/ai-notify-tg",
+      "description": "Telegram notification service for AI coding assistants"
+    }
+  }
+}
