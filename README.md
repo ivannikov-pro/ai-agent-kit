@@ -115,4 +115,4 @@ pnpm --filter cli build   # Build CLI only
 
 ## License
 
-MIT © [ivannikov-pro](https://github.com/ivannikov-pro)
+[MIT](./LICENSE)
