@@ -1,28 +1,12 @@
 {
-  "name": "@ivannikov-pro/agent-kit",
+  "name": "agent-kit",
   "version": "0.1.0",
-  "description": "CLI + MCP server for installing AI agent skills, workflows, and MCP configs",
-  "type": "module",
-  "bin": {
-    "agent-kit": "./dist/bin.js"
-  },
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      }
-    }
-  },
-  "files": [
-    "dist",
-    "registry.json"
-  ],
+  "private": true,
+  "description": "🛠️ CLI + MCP server + web catalog for AI agent skills, workflows, and MCP configs",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "lint": "eslint src/",
-    "prepublishOnly": "npm run build"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint"
   },
   "keywords": [
     "ai-agent",
@@ -42,16 +26,8 @@
   "engines": {
     "node": ">=20"
   },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
-    "chalk": "^5.4.1",
-    "commander": "^13.1.0",
-    "ora": "^8.2.0",
-    "zod": "^3.25.17"
-  },
+  "packageManager": "pnpm@9.15.9",
   "devDependencies": {
-    "@types/node": "^22.15.0",
-    "tsup": "^8.5.1",
-    "typescript": "^5.8.3"
+    "turbo": "^2.5.4"
   }
 }

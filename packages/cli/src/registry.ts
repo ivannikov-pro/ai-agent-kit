@@ -20,19 +20,28 @@ export async function loadRegistry(): Promise<RegistryConfig> {
     return cachedRegistry;
   }
 
-  // Try bundled registry (one level up from dist/)
-  const localPath = join(__dirname, "..", "registry.json");
+  // Try local registry: packages/cli/dist/ → monorepo root
+  const localPaths = [
+    join(__dirname, "..", "..", "..", "registry.json"), // from dist/ → root
+    join(__dirname, "..", "registry.json"),             // fallback: old layout
+  ];
 
-  try {
-    const content = await readFile(localPath, "utf-8");
+  for (const localPath of localPaths) {
+    try {
+      const content = await readFile(localPath, "utf-8");
 
-    cachedRegistry = JSON.parse(content) as RegistryConfig;
+      cachedRegistry = JSON.parse(content) as RegistryConfig;
 
-    return cachedRegistry;
-  } catch {
-    // Fallback: fetch from GitHub
+      return cachedRegistry;
+    } catch {
+      // try next path
+    }
+  }
+
+  // Fallback: fetch from GitHub
+  {
     const url =
-      "https://raw.githubusercontent.com/ivannikov-pro/agent-kit/main/registry.json";
+      "https://raw.githubusercontent.com/ivannikov-pro/agent-kit/master/registry.json";
 
     const res = await fetch(url);
 

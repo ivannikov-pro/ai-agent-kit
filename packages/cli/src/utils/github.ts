@@ -4,6 +4,9 @@ import { join, dirname } from "node:path";
 
 const GITHUB_API = "https://api.github.com";
 
+/** Default repo for local: sources */
+const DEFAULT_REPO = "ivannikov-pro/agent-kit";
+
 
 type GitHubTreeItem = {
   path: string;
@@ -20,26 +23,44 @@ type GitHubBlobResponse = {
 };
 
 
-/**
- * Parse a source string like "github:owner/repo" or "github:owner/repo/path/to/dir"
- */
-export function parseGitHubSource(source: string): {
+export type ParsedSource = {
+  type: "github" | "local";
   owner: string;
   repo: string;
   path: string;
-} {
-  const cleaned = source.replace("github:", "");
-  const parts = cleaned.split("/");
+};
 
-  if (parts.length < 2) {
-    throw new Error(`Invalid GitHub source: ${source}`);
+
+/**
+ * Parse a source string:
+ * - "github:owner/repo" or "github:owner/repo/path/to/dir"
+ * - "local:skills/skill-base" → resolves to DEFAULT_REPO + path
+ */
+export function parseSource(source: string): ParsedSource {
+  if (source.startsWith("local:")) {
+    const path = source.replace("local:", "");
+    const [owner, repo] = DEFAULT_REPO.split("/");
+
+    return { type: "local", owner, repo, path };
   }
 
-  const owner = parts[0];
-  const repo = parts[1];
-  const path = parts.slice(2).join("/") || "";
+  if (source.startsWith("github:")) {
+    const cleaned = source.replace("github:", "");
+    const parts = cleaned.split("/");
 
-  return { owner, repo, path };
+    if (parts.length < 2) {
+      throw new Error(`Invalid GitHub source: ${source}`);
+    }
+
+    return {
+      type: "github",
+      owner: parts[0],
+      repo: parts[1],
+      path: parts.slice(2).join("/") || "",
+    };
+  }
+
+  throw new Error(`Unknown source format: ${source}`);
 }
 
 
@@ -54,7 +75,6 @@ async function fetchTree(
   const ref = "HEAD";
 
   if (path) {
-    // Fetch specific directory contents
     const url = `${GITHUB_API}/repos/${owner}/${repo}/contents/${path}?ref=${ref}`;
     const res = await fetch(url, {
       headers: getHeaders(),
@@ -83,7 +103,6 @@ async function fetchTree(
     }));
   }
 
-  // Fetch entire repo tree
   const url = `${GITHUB_API}/repos/${owner}/${repo}/git/trees/${ref}?recursive=1`;
   const res = await fetch(url, {
     headers: getHeaders(),
@@ -142,13 +161,14 @@ export async function downloadGitHubDir(
   const files: string[] = [];
 
   if (remotePath) {
-    // Download specific directory
     const items = await fetchTree(owner, repo, remotePath);
 
     for (const item of items) {
       if (item.type === "blob") {
         const content = await downloadFile(owner, repo, item.path);
-        const relativePath = item.path.replace(`${remotePath}/`, "").replace(remotePath, "");
+        const relativePath = item.path
+          .replace(`${remotePath}/`, "")
+          .replace(remotePath, "");
         const localFilePath = relativePath
           ? join(localPath, relativePath)
           : join(localPath, item.path.split("/").pop()!);
@@ -158,7 +178,6 @@ export async function downloadGitHubDir(
 
         files.push(localFilePath);
       } else if (item.type === "tree") {
-        // Recursively download subdirectory
         const subFiles = await downloadGitHubDir(
           owner,
           repo,
@@ -170,10 +189,15 @@ export async function downloadGitHubDir(
       }
     }
   } else {
-    // Download entire repo (excluding usual meta files)
     const tree = await fetchTree(owner, repo, "");
     const skipPrefixes = [".git", ".github", "node_modules"];
-    const skipFiles = [".gitignore", "LICENSE", "README.md", "package.json", "package-lock.json"];
+    const skipFiles = [
+      ".gitignore",
+      "LICENSE",
+      "README.md",
+      "package.json",
+      "package-lock.json",
+    ];
 
     const blobs = tree.filter(
       (item) =>

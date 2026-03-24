@@ -1,15 +1,16 @@
 {
   "$schema": "./registry.schema.json",
   "version": "1",
+  "repo": "ivannikov-pro/agent-kit",
   "skills": {
     "skill-base": {
-      "source": "github:ivannikov-pro/skill-base",
+      "source": "local:skills/skill-base",
       "description": "How to create, maintain, and distribute AI agent skills. Meta-skill for scaffolding new skills.",
       "tags": ["meta", "scaffolding", "agentskills"],
       "version": "1.0.0"
     },
     "find-docs": {
-      "source": "github:ivannikov-pro/find-docs-skill",
+      "source": "local:skills/find-docs",
       "description": "Documentation lookup via Context7 MCP — retrieves up-to-date docs and code examples for any library.",
       "tags": ["documentation", "context7", "mcp"],
       "version": "1.0.0"

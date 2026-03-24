@@ -1,5 +1,5 @@
 import type { SkillEntry, WorkflowEntry, AddOptions } from "./types.js";
-import { parseGitHubSource, downloadGitHubDir } from "./utils/github.js";
+import { parseSource, downloadGitHubDir } from "./utils/github.js";
 import { ensureDir, getSkillsDir, getWorkflowsDir } from "./utils/fs.js";
 
 
@@ -11,7 +11,7 @@ export async function installSkill(
   entry: SkillEntry,
   options: AddOptions = {},
 ): Promise<string> {
-  const { owner, repo, path } = parseGitHubSource(entry.source);
+  const source = parseSource(entry.source);
 
   const targetDir = options.target
     ? options.target
@@ -21,7 +21,7 @@ export async function installSkill(
 
   await ensureDir(skillDir);
 
-  await downloadGitHubDir(owner, repo, path, skillDir);
+  await downloadGitHubDir(source.owner, source.repo, source.path, skillDir);
 
   return skillDir;
 }
@@ -35,7 +35,7 @@ export async function installWorkflow(
   entry: WorkflowEntry,
   options: AddOptions = {},
 ): Promise<string> {
-  const { owner, repo, path } = parseGitHubSource(entry.source);
+  const source = parseSource(entry.source);
 
   const targetDir = options.target
     ? options.target
@@ -43,7 +43,7 @@ export async function installWorkflow(
 
   await ensureDir(targetDir);
 
-  await downloadGitHubDir(owner, repo, path, targetDir);
+  await downloadGitHubDir(source.owner, source.repo, source.path, targetDir);
 
   return targetDir;
 }
