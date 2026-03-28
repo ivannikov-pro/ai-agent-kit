@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -11,6 +12,29 @@ export function generateStaticParams() {
   return skills.map((skill) => ({
     name: skill.name,
   }));
+}
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}): Promise<Metadata> {
+  const { name } = await params;
+  const skill = loadSkill(name);
+
+  if (!skill) {
+    return { title: "Skill Not Found" };
+  }
+
+  return {
+    title: skill.name,
+    description: skill.description.split(".").slice(0, 2).join(".") + ".",
+    openGraph: {
+      title: `${skill.name} — ai-agent-kit skill`,
+      description: skill.description.split(".")[0] + ".",
+    },
+  };
 }
 
 
@@ -30,21 +54,36 @@ export default async function SkillPage({
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       {/* Breadcrumb */}
-      <nav className="mb-8 text-sm text-[var(--color-text-dim)]">
+      <nav className="mb-8 animate-fade-in-up">
         <a
           href="/"
-          className="hover:text-[var(--color-accent)] transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-[var(--color-text-dim)] hover:text-[var(--color-accent)] transition-colors group"
         >
-          ← Back to catalog
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            className="group-hover:-translate-x-0.5 transition-transform"
+          >
+            <path
+              d="M10 12L6 8L10 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back to catalog
         </a>
       </nav>
 
 
       {/* Header */}
-      <header className="mb-10">
+      <header className="mb-12 animate-fade-in-up-delay-1">
         <div className="flex items-center gap-3 mb-4">
-          <h1 className="text-3xl font-bold">{skill.name}</h1>
-          <span className="text-xs px-2 py-0.5 rounded-full border bg-cyan-500/15 text-cyan-400 border-cyan-500/30">
+          <h1 className="text-3xl md:text-4xl font-bold">{skill.name}</h1>
+          <span className="text-[10px] px-2.5 py-1 rounded-full border bg-cyan-500/10 text-cyan-400 border-cyan-500/25 font-medium uppercase tracking-wider">
             skill
           </span>
         </div>
@@ -55,24 +94,24 @@ export default async function SkillPage({
 
 
         {/* Meta chips */}
-        <div className="flex flex-wrap gap-3 mt-6">
+        <div className="flex flex-wrap gap-2.5 mt-6">
           {skill.version && (
-            <span className="text-xs px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-dim)]">
+            <span className="text-xs px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-dim)] font-medium">
               v{skill.version}
             </span>
           )}
           {skill.author && (
-            <span className="text-xs px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-dim)]">
+            <span className="text-xs px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-dim)] font-medium">
               by {skill.author}
             </span>
           )}
           {skill.license && (
-            <span className="text-xs px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-dim)]">
+            <span className="text-xs px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-dim)] font-medium">
               {skill.license}
             </span>
           )}
           {skill.category && (
-            <span className="text-xs px-3 py-1 rounded-full bg-purple-500/15 text-purple-400 border border-purple-500/30">
+            <span className="text-xs px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/25 font-medium">
               {skill.category}
             </span>
           )}
@@ -81,11 +120,11 @@ export default async function SkillPage({
 
         {/* Tags */}
         {skill.tags && skill.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4">
+          <div className="flex flex-wrap gap-1.5 mt-4">
             {skill.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded bg-[var(--color-accent-dim)] text-[var(--color-accent)]"
+                className="text-[11px] px-2 py-0.5 rounded-md bg-[var(--color-accent-dim)] text-[var(--color-accent)] font-medium"
               >
                 {tag}
               </span>
@@ -95,11 +134,12 @@ export default async function SkillPage({
 
 
         {/* Install command */}
-        <div className="mt-6 p-4 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
-          <div className="text-xs text-[var(--color-text-dim)] mb-2">
-            Install this skill:
+        <div className="mt-8 p-5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
+          <div className="text-[11px] text-[var(--color-text-muted)] mb-2 uppercase tracking-wider font-medium">
+            Install this skill
           </div>
-          <code className="text-sm text-[var(--color-accent)]">
+          <code className="text-sm text-[var(--color-accent)] font-[var(--font-mono)]">
+            <span className="text-[var(--color-text-muted)] mr-2">$</span>
             npx @ivannikov-pro/ai-agent-kit add {skill.name}
           </code>
         </div>
@@ -107,7 +147,7 @@ export default async function SkillPage({
 
 
       {/* SKILL.md Content */}
-      <article className="prose prose-invert prose-sm max-w-none prose-headings:text-[var(--color-text)] prose-p:text-[var(--color-text-dim)] prose-a:text-[var(--color-accent)] prose-code:text-cyan-300 prose-code:bg-[var(--color-surface)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[var(--color-surface)] prose-pre:border prose-pre:border-[var(--color-border)] prose-table:border-collapse [&_th]:border [&_th]:border-[var(--color-border)] [&_th]:px-3 [&_th]:py-2 [&_td]:border [&_td]:border-[var(--color-border)] [&_td]:px-3 [&_td]:py-2 [&_th]:bg-[var(--color-surface)]">
+      <article className="prose-custom animate-fade-in-up-delay-2">
         <Markdown remarkPlugins={[remarkGfm]}>{skill.content}</Markdown>
       </article>
     </div>
