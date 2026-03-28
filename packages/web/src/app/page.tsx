@@ -1,4 +1,5 @@
 import { loadAllSkills, loadRegistry } from "@/lib/data";
+import Link from "next/link";
 
 
 
@@ -129,7 +130,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {skills.map((skill) => (
-            <a
+            <Link
               key={skill.name}
               href={`/skills/${skill.name}`}
               className="group block p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-surface-hover)] transition-all duration-[var(--transition-base)] no-underline"
@@ -170,7 +171,7 @@ export default function HomePage() {
                   ))}
                 </div>
               )}
-            </a>
+            </Link>
           ))}
         </div>
       </section>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import "./globals.css";
 
@@ -55,7 +56,7 @@ function NavLink({
   external?: boolean;
 }) {
   return (
-    <a
+    <Link
       href={href}
       className="text-[var(--color-text-dim)] hover:text-[var(--color-text)] transition-colors text-sm font-medium"
       {...(external
@@ -63,7 +64,7 @@ function NavLink({
         : {})}
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -92,14 +93,14 @@ export default function RootLayout({
         {/* ─── Header ─── */}
         <header className="sticky top-0 z-50 border-b border-[var(--color-border)] backdrop-blur-xl bg-[var(--color-background)]/85">
           <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="/" className="flex items-center gap-2.5 group">
+            <Link href="/" className="flex items-center gap-2.5 group">
               <span className="text-xl font-bold tracking-tight text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
                 AI-AGENT-KIT
               </span>
               <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-[var(--color-accent-dim)] text-[var(--color-accent)] border border-[var(--color-accent)]/20 uppercase tracking-wider">
                 OSS
               </span>
-            </a>
+            </Link>
 
             <nav className="flex items-center gap-6">
               <NavLink href="/#skills">Skills</NavLink>

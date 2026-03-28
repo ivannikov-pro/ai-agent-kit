@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -56,7 +57,7 @@ export default async function SkillPage({
     <div className="max-w-4xl mx-auto px-6 py-12">
       {/* Breadcrumb */}
       <nav className="mb-8 animate-fade-in-up">
-        <a
+        <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-[var(--color-text-dim)] hover:text-[var(--color-accent)] transition-colors group"
         >
@@ -76,7 +77,7 @@ export default async function SkillPage({
             />
           </svg>
           Back to catalog
-        </a>
+        </Link>
       </nav>
 
 
