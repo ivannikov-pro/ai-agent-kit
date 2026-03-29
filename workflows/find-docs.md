@@ -37,17 +37,23 @@ Use this workflow whenever you need up-to-date library documentation, API refere
 - **Descriptive queries** — `"How to set up JWT auth in Express.js"` NOT `"auth"`
 - **No secrets in queries** — never include API keys, passwords, or credentials
 
-## Key Libraries for This Project
+## Common Library IDs for This Project
 
-<!-- CUSTOMIZE: Replace with your project's actual libraries -->
-<!-- Use `resolve-library-id` to find the correct Context7 ID -->
-
-| Library | Context7 ID |
-|---------|------------|
-| Example lib | `/org/project` |
+| Library          | Context7 ID                 |
+| ---------------- | --------------------------- |
+| OpenZeppelin 5.x | `/openzeppelin/contracts`   |
+| Next.js 14       | `/vercel/next.js`           |
+| React 18         | `/facebook/react`           |
+| Foundry          | `/foundry-rs/foundry`       |
+| Tailwind CSS     | `/tailwindlabs/tailwindcss` |
+| Ethers.js v6     | `/websites/ethers_v6`       |
+| Reown AppKit     | `/websites/reown`           |
+| Hardhat          | `/nomicfoundation/hardhat`  |
+| Wagmi            | `/wevm/wagmi`               |
+| Viem             | `/wevm/viem`                |
 
 ## Error Handling
 
-- **Quota exceeded**: inform the user, suggest getting API key at context7.com/dashboard
+- **Quota exceeded**: inform the user, suggest `ctx7 login` for higher limits
 - **No results**: refine query, try alternative library name, or fall back to training data (but tell the user)
 - **Wrong library matched**: be explicit about which library you selected and why

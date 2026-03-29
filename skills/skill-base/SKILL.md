@@ -10,7 +10,7 @@ date_added: "2026-03-21"
 license: MIT
 metadata:
   author: ivannikov-pro
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Creating Agent Skills
@@ -18,7 +18,7 @@ metadata:
 Guide for creating and maintaining SKILL.md-based skills compatible with all AI agents (Claude Code, Cursor, Gemini CLI, Antigravity, Copilot, Windsurf, Kiro, Codex CLI, OpenCode, AdaL).
 
 > **Standard:** [agentskills.io](https://agentskills.io) (Anthropic, Dec 2025)
-> **Skill updated:** 2026-03-21
+> **Skill updated:** 2026-03-28
 
 ## When to Use
 
@@ -27,6 +27,8 @@ Guide for creating and maintaining SKILL.md-based skills compatible with all AI 
 - Setting up skill infrastructure in a project or monorepo
 - Publishing a skill to a community repository
 - Distributing skills across multiple AI agents
+- **Auditing existing skills** for compliance (use `scripts/audit-skills.sh`)
+- **Batch-upgrading** legacy skills from minimal to full frontmatter
 
 ## When NOT to Use
 
@@ -55,18 +57,18 @@ Guide for creating and maintaining SKILL.md-based skills compatible with all AI 
 
 Agents discover skills from global and project directories:
 
-| Agent             | Global                          | Project                                |
-| ----------------- | ------------------------------- | -------------------------------------- |
-| Claude Code       | `~/.claude/skills/`             | `.claude/skills/`                      |
-| Gemini CLI        | `~/.gemini/skills/`             | `.gemini/skills/` or `.agents/skills/` |
-| Antigravity       | `~/.gemini/antigravity/skills/` | `.agent/skills/` or `.agents/skills/`  |
-| Cursor            | `~/.cursor/skills/`             | `.cursor/skills/`                      |
-| Copilot (VS Code) | —                               | `.github/skills/` or `.agents/skills/` |
-| Windsurf          | `~/.codeium/windsurf/skills/`   | `.windsurf/skills/`                    |
-| Kiro              | `~/.kiro/skills/`               | `.kiro/skills/`                        |
-| Codex CLI         | `~/.codex/skills/`              | `.codex/skills/`                       |
-| OpenCode          | `~/.agents/skills/`             | `.agents/skills/`                      |
-| AdaL CLI          | `~/.adal/skills/`               | `.adal/skills/`                        |
+| Agent | Global | Project |
+|-------|--------|---------|
+| Claude Code | `~/.claude/skills/` | `.claude/skills/` |
+| Gemini CLI | `~/.gemini/skills/` | `.gemini/skills/` or `.agents/skills/` |
+| Antigravity | `~/.gemini/antigravity/skills/` | `.agent/skills/` or `.agents/skills/` |
+| Cursor | `~/.cursor/skills/` | `.cursor/skills/` |
+| Copilot (VS Code) | — | `.github/skills/` or `.agents/skills/` |
+| Windsurf | `~/.codeium/windsurf/skills/` | `.windsurf/skills/` |
+| Kiro | `~/.kiro/skills/` | `.kiro/skills/` |
+| Codex CLI | `~/.codex/skills/` | `.codex/skills/` |
+| OpenCode | `~/.agents/skills/` | `.agents/skills/` |
+| AdaL CLI | `~/.adal/skills/` | `.adal/skills/` |
 
 ## SKILL.md Template
 
@@ -83,38 +85,38 @@ Required structure: frontmatter → title → metadata block → content section
 
 Official fields per [agentskills.io/specification](https://agentskills.io/specification):
 
-| Field           | Required | Limit        | Description                                                    |
-| --------------- | :------: | :----------: | -------------------------------------------------------------- |
-| `name`          | ✅        | 1-64 chars   | Lowercase `a-z` + hyphens, must match folder name, no `--`     |
-| `description`   | ✅        | 1-1024 chars | What skill does + **when to use it** (agent discovery trigger) |
-| `license`       | optional | —            | License identifier or reference to LICENSE file                |
-| `compatibility` | optional | 1-500 chars  | Runtime/tool requirements (`Requires Python 3.14+`, etc.)      |
-| `metadata`      | optional | —            | Key-value map (`author`, `version`, custom props)              |
-| `allowed-tools` | optional | —            | Space-delimited pre-approved tools: `Bash(git:*) Read`         |
+| Field | Required | Limit | Description |
+|-------|:--------:|:-----:|-------------|
+| `name` | ✅ | 1-64 chars | Lowercase `a-z` + hyphens, must match folder name, no `--` |
+| `description` | ✅ | 1-1024 chars | What skill does + **when to use it** (agent discovery trigger) |
+| `license` | optional | — | License identifier or reference to LICENSE file |
+| `compatibility` | optional | 1-500 chars | Runtime/tool requirements (`Requires Python 3.14+`, etc.) |
+| `metadata` | optional | — | Key-value map (`author`, `version`, custom props) |
+| `allowed-tools` | optional | — | Space-delimited pre-approved tools: `Bash(git:*) Read` |
 
 Community-extended fields (used by [antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills)):
 
-| Field        | Description                                                   |
-| ------------ | ------------------------------------------------------------- |
-| `risk`       | `safe`, `unknown`, `offensive`, or `critical` (default: safe) |
-| `category`   | Skill category: `meta`, `security`, `development`, etc.       |
-| `tags`       | Array of searchable tags                                      |
-| `tools`      | Target agents: `[claude, cursor, gemini, ...]`                |
-| `date_added` | First publish date (YYYY-MM-DD)                               |
-| `source`     | `community` or `official`                                     |
+| Field | Description |
+|-------|-------------|
+| `risk` | `safe`, `unknown`, `offensive`, or `critical` (default: safe) |
+| `category` | Skill category: `meta`, `security`, `development`, etc. |
+| `tags` | Array of searchable tags |
+| `tools` | Target agents: `[claude, cursor, gemini, ...]` |
+| `date_added` | First publish date (YYYY-MM-DD) |
+| `source` | `community` or `official` |
 
 ## Required Sections
 
-| Section              | Required    | Why                                         |
-| -------------------- | :---------: | ------------------------------------------- |
-| YAML frontmatter     | ✅           | Agents discover skills via `description`    |
-| Title + description  | ✅           | Context for agent                           |
-| When to Use          | ✅           | Trigger conditions for agent selection      |
-| Metadata block       | ✅           | Source, version, dates for freshness check  |
-| Installation / Usage | ✅           | How to use the skill                        |
-| Gotchas (⚠️)         | ✅           | Agent-specific traps and known issues       |
-| When NOT to Use      | recommended | Prevents false positive activation          |
-| Security & Safety    | recommended | For skills with shell commands or mutations |
+| Section | Required | Why |
+|---------|:--------:|-----|
+| YAML frontmatter | ✅ | Agents discover skills via `description` |
+| Title + description | ✅ | Context for agent |
+| When to Use | ✅ | Trigger conditions for agent selection |
+| Metadata block | ✅ | Source, version, dates for freshness check |
+| Installation / Usage | ✅ | How to use the skill |
+| Gotchas (⚠️) | ✅ | Agent-specific traps and known issues |
+| When NOT to Use | recommended | Prevents false positive activation |
+| Security & Safety | recommended | For skills with shell commands or mutations |
 
 ## Naming Convention
 
@@ -182,6 +184,15 @@ Use `npm install` in skills, not `pnpm add` or `yarn add`. Users choose their pa
 - **Problem:** Skill works in Claude but not in Cursor/Gemini
   **Fix:** Each agent reads different directories — check the discovery paths table above
 
+- **Problem:** Skill copied from another project describes wrong project context
+  **Fix:** After copying skills between monorepos, always audit project-specific references (package names, directory structures, tech stack). Use `grep -n 'old-project-name' .agents/skills/*/SKILL.md`
+
+- **Problem:** Bilingual skills have description in non-English
+  **Fix:** Always write `description` in English with "Use when..." — agents search English tokens. Skill body content can be in any language
+
+- **Problem:** Skills have minimal 3-line frontmatter (name, description, ---)
+  **Fix:** Upgrade to full frontmatter using the batch upgrade workflow below
+
 ## Security & Safety Notes
 
 - Skills with shell commands (`curl`, `bash`, `wget`) should set `risk: offensive` or `risk: critical`
@@ -194,27 +205,83 @@ Use `npm install` in skills, not `pnpm add` or `yarn add`. Users choose their pa
 Before publishing a skill:
 
 - [ ] Frontmatter `name` matches folder name
-- [ ] `description` contains "Use when..." trigger phrase
+- [ ] `description` in English, contains "Use when..." trigger phrase
+- [ ] Extended frontmatter: `category`, `tags`, `tools`, `metadata.version`
 - [ ] SKILL.md ≤ 500 lines (detailed content in `references/`)
-- [ ] Code examples included, not just prose
+- [ ] "When to Use" section present
 - [ ] ⚠️ Gotchas section present
+- [ ] Code examples included, not just prose
+- [ ] No stale project references from other repos
 - [ ] Tested with at least one AI agent
+
+### Automated Audit
+
+Run the audit script to check all skills at once:
+
+```bash
+# From project root
+bash .agents/skills/skill-base/scripts/audit-skills.sh .agents/skills
+
+# Or from the skill-base skill itself
+bash scripts/audit-skills.sh /path/to/.agents/skills
+```
+
+The script checks: frontmatter fields, name matching, trigger phrases, required sections, and line count.
+
+## Batch Frontmatter Upgrade
+
+When upgrading legacy skills from minimal (3-line) to full frontmatter:
+
+### Before (minimal)
+
+```yaml
+---
+name: my-skill
+description: Some description.
+---
+```
+
+### After (full)
+
+```yaml
+---
+name: my-skill
+description: Some description. Use when <trigger condition>.
+category: development
+risk: safe
+source: local
+tags: [relevant, tags]
+tools: [claude, cursor, gemini, antigravity, copilot, windsurf, kiro]
+date_added: "YYYY-MM-DD"
+metadata:
+  version: "1.0.0"
+---
+```
+
+### Upgrade workflow
+
+1. Run audit script to identify non-compliant skills
+2. For each skill, add missing fields to existing frontmatter block
+3. Add "When to Use" section if missing (after title)
+4. Add "⚠️ Gotchas" section if missing (at end)
+5. Set `date_added` to when the skill was first created
+6. Re-run audit script to verify compliance
 
 ## Agent Documentation Files
 
 For multi-package projects (monorepos), keep agent configuration files consistent.
 
-| File                              | Who reads it            | Notes                                                     |
-| --------------------------------- | ----------------------- | --------------------------------------------------------- |
-| `AGENTS.md`                       | All agents              | Universal project context                                 |
-| `CLAUDE.md`                       | Claude Code             | Project instructions                                      |
-| `GEMINI.md`                       | Gemini CLI, Antigravity | Project context file                                      |
-| `.gemini/settings.json`           | Gemini CLI              | System instruction                                        |
-| `.cursor/rules/*.mdc`             | Cursor                  | Replaced `.cursorrules`                                   |
-| `.windsurfrules`                  | Windsurf                | Legacy; new: `.windsurf/rules/*.md`                       |
-| `.github/copilot-instructions.md` | Copilot (VS Code)       | Project instructions                                      |
-| `.kiro/steering/*.md`             | Kiro                    | Project context (`product.md`, `tech.md`, `structure.md`) |
-| `codex.md`                        | Codex CLI               | Project instructions                                      |
+| File | Who reads it | Notes |
+|------|-------------|-------|
+| `AGENTS.md` | All agents | Universal project context |
+| `CLAUDE.md` | Claude Code | Project instructions |
+| `GEMINI.md` | Gemini CLI, Antigravity | Project context file |
+| `.gemini/settings.json` | Gemini CLI | System instruction |
+| `.cursor/rules/*.mdc` | Cursor | Replaced `.cursorrules` |
+| `.windsurfrules` | Windsurf | Legacy; new: `.windsurf/rules/*.md` |
+| `.github/copilot-instructions.md` | Copilot (VS Code) | Project instructions |
+| `.kiro/steering/*.md` | Kiro | Project context (`product.md`, `tech.md`, `structure.md`) |
+| `codex.md` | Codex CLI | Project instructions |
 
 See [references/AGENT_CONFIG_FILES.md](references/AGENT_CONFIG_FILES.md) for formats and examples.
 
