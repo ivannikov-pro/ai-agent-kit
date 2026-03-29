@@ -34,15 +34,15 @@ npx @ivannikov-pro/ai-agent-kit@latest init
 
 ## CLI Commands
 
-| Command | Description |
-|---------|-------------|
-| `ai-agent-kit list` | List all available resources |
-| `ai-agent-kit list --skills` | List only skills |
-| `ai-agent-kit add <name>` | Install a skill or workflow |
-| `ai-agent-kit add <name> --global` | Install globally (`~/.agents/`) |
-| `ai-agent-kit remove <name>` | Remove an installed resource |
-| `ai-agent-kit init` | Interactive project initialization |
-| `ai-agent-kit mcp` | Start as MCP server (stdio) |
+| Command                            | Description                        |
+| ---------------------------------- | ---------------------------------- |
+| `ai-agent-kit list`                | List all available resources       |
+| `ai-agent-kit list --skills`       | List only skills                   |
+| `ai-agent-kit add <name>`          | Install a skill or workflow        |
+| `ai-agent-kit add <name> --global` | Install globally (`~/.agents/`)    |
+| `ai-agent-kit remove <name>`       | Remove an installed resource       |
+| `ai-agent-kit init`                | Interactive project initialization |
+| `ai-agent-kit mcp`                 | Start as MCP server (stdio)        |
 
 ## As MCP Server
 
@@ -61,11 +61,11 @@ Add to your AI agent's MCP config:
 
 ### MCP Tools
 
-| Tool | Description |
-|------|-------------|
-| `list_resources` | List skills, workflows, and MCP configs |
-| `install_resource` | Install a resource by name |
-| `search_resources` | Search by keyword or tag |
+| Tool               | Description                             |
+| ------------------ | --------------------------------------- |
+| `list_resources`   | List skills, workflows, and MCP configs |
+| `install_resource` | Install a resource by name              |
+| `search_resources` | Search by keyword or tag                |
 
 ## Programmatic API
 
@@ -82,15 +82,15 @@ await kit.install("find-docs");
 
 ### Skills
 
-| Name | Description |
-|------|-------------|
+| Name         | Description                                             |
+| ------------ | ------------------------------------------------------- |
 | `skill-base` | How to create, maintain, and distribute AI agent skills |
-| `find-docs` | Documentation lookup via Context7 MCP |
+| `find-docs`  | Documentation lookup via Context7 MCP                   |
 
 ### MCP Configs
 
-| Name | Package |
-|------|---------|
+| Name           | Package                       |
+| -------------- | ----------------------------- |
 | `ai-notify-tg` | `@ivannikov-pro/ai-notify-tg` |
 
 ## Development
@@ -109,8 +109,8 @@ pnpm --filter cli build   # Build CLI only
 
 ## Environment Variables
 
-| Variable | Description |
-|----------|-------------|
+| Variable                    | Description                             |
+| --------------------------- | --------------------------------------- |
 | `GITHUB_TOKEN` / `GH_TOKEN` | GitHub token for higher API rate limits |
 
 ## License

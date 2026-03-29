@@ -30,13 +30,13 @@
 
 Published as `@ivannikov-pro/ai-agent-kit` on npm. Provides:
 
-| Command | Description |
-|---------|-------------|
-| `ai-agent-kit list` | List all available resources from registry |
-| `ai-agent-kit add <name>` | Install a skill/workflow into the project |
-| `ai-agent-kit remove <name>` | Remove an installed resource |
-| `ai-agent-kit init` | Interactive project setup |
-| `ai-agent-kit mcp` | Start as MCP server (stdio) |
+| Command                      | Description                                |
+| ---------------------------- | ------------------------------------------ |
+| `ai-agent-kit list`          | List all available resources from registry |
+| `ai-agent-kit add <name>`    | Install a skill/workflow into the project  |
+| `ai-agent-kit remove <name>` | Remove an installed resource               |
+| `ai-agent-kit init`          | Interactive project setup                  |
+| `ai-agent-kit mcp`           | Start as MCP server (stdio)                |
 
 **Tech:** TypeScript, commander, tsup (ESM build), Node 20+
 
@@ -53,11 +53,11 @@ Both resolve via GitHub Contents API. Set `GITHUB_TOKEN` for higher rate limits.
 
 Runs via `ai-agent-kit mcp` command using stdio transport. Exposes 3 tools:
 
-| Tool | Description |
-|------|-------------|
-| `list_resources` | List skills/workflows/MCP with optional type filter |
-| `install_resource` | Install a resource by name |
-| `search_resources` | Search by keyword/tag |
+| Tool               | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| `list_resources`   | List skills/workflows/MCP with optional type filter |
+| `install_resource` | Install a resource by name                          |
+| `search_resources` | Search by keyword/tag                               |
 
 **Protocol:** `@modelcontextprotocol/sdk`, Zod schemas for tool parameters.
 
@@ -65,9 +65,9 @@ Runs via `ai-agent-kit mcp` command using stdio transport. Exposes 3 tools:
 
 Static site generated with Next.js. Reads `registry.json` and `skills/*/SKILL.md` at build time.
 
-| Route | Description |
-|-------|-------------|
-| `/` | Homepage — skill cards, stats, MCP section |
+| Route            | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `/`              | Homepage — skill cards, stats, MCP section     |
 | `/skills/[name]` | Skill detail — rendered SKILL.md with metadata |
 
 **Tech:** Next.js 16, React 19, Tailwind 4, react-markdown, gray-matter
@@ -155,12 +155,12 @@ User runs:  npx @ivannikov-pro/ai-agent-kit@latest add skill-base
 
 ## Build System
 
-| Tool | Purpose |
-|------|---------|
-| **pnpm** | Package manager with workspace protocol |
-| **Turborepo** | Task runner (`build`, `dev`, `lint`) |
-| **tsup** | CLI bundler (ESM + DTS) |
-| **Next.js** | Web app (Turbopack + static export) |
+| Tool          | Purpose                                 |
+| ------------- | --------------------------------------- |
+| **pnpm**      | Package manager with workspace protocol |
+| **Turborepo** | Task runner (`build`, `dev`, `lint`)    |
+| **tsup**      | CLI bundler (ESM + DTS)                 |
+| **Next.js**   | Web app (Turbopack + static export)     |
 
 ### Build Commands
 
