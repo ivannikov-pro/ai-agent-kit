@@ -107,11 +107,6 @@ async function main() {
   const registryPath = path.join(process.cwd(), "registry.json");
   const catalogPath = path.join(process.cwd(), "CATALOG.md");
   let registryObj = { version: "1.0", repo: "ivannikov-pro/ai-agent-kit", skills: {}, workflows: {}, mcp: {} };
-  
-  try {
-    const existing = JSON.parse(await fs.readFile(registryPath, "utf8"));
-    if (existing && existing.mcp) registryObj.mcp = existing.mcp;
-  } catch(e) {}
 
   // Parse skills
   const skillsDir = path.join(process.cwd(), "skills");
@@ -264,8 +259,18 @@ async function main() {
   }
 
   // Finalize
-  await fs.writeFile(registryPath, JSON.stringify(registryObj, null, 2) + "\n", "utf8");
-  await fs.writeFile(catalogPath, renderCatalog(registryObj), "utf8");
+  const newRegistryContent = JSON.stringify(registryObj, null, 2) + "\n";
+  let existingRegistryContent = "";
+  try {
+    existingRegistryContent = await fs.readFile(registryPath, "utf8");
+  } catch(e) {}
+
+  if (newRegistryContent !== existingRegistryContent) {
+    await fs.writeFile(registryPath, newRegistryContent, "utf8");
+    await fs.writeFile(catalogPath, renderCatalog(registryObj), "utf8");
+  } else if (!fsSync.existsSync(catalogPath)) {
+    await fs.writeFile(catalogPath, renderCatalog(registryObj), "utf8");
+  }
   
   const totalItems = Object.keys(registryObj.skills).length + Object.keys(registryObj.workflows).length + Object.keys(registryObj.mcp).length;
   console.log(`\n📊 Checked items in registry. Wrote ${totalItems} total items.`);

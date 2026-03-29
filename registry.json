@@ -349,10 +349,5 @@
       "tags": []
     }
   },
-  "mcp": {
-    "ai-notify-tg": {
-      "package": "@ivannikov-pro/ai-notify-tg",
-      "description": "Telegram notification service for AI coding assistants"
-    }
-  }
+  "mcp": {}
 }

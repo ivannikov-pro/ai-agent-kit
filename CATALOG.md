@@ -1,6 +1,6 @@
 # AI Agent Catalog
 
-Generated at: 2026-03-29T01:05:45.502Z
+Generated at: 2026-03-29T01:09:08.419Z
 
 ## SKILLS (16)
 
@@ -50,9 +50,3 @@ Prefer this skill whenever documentation accuracy matters or when model knowledg
 | `project-brief` | general | Outcome-first бриф проекта — начинается с бизнес-целей, а не с ТЗ | `local:workflows/project-brief` |
 | `proposal` | business | Генерация outcome-ориентированного коммерческого предложения для клиента | `local:workflows/proposal` |
 | `svg-to-icon` | development | How to convert an inline SVG or raw SVG file from Figma into a compliant React component in @ivannikov-pro/ui/src/icons | `local:workflows/svg-to-icon` |
-
-## MCP (1)
-
-| Package | Name | Category | Description | Source |
-| --- | --- | --- | --- | --- |
-| `@ivannikov-pro/ai-notify-tg` | `ai-notify-tg` | — | Telegram notification service for AI coding assistants | `undefined` |
