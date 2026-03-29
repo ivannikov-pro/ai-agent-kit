@@ -1,7 +1,7 @@
 import chalk from "chalk";
-
 import { listResources } from "../registry.js";
 import type { ListOptions } from "../types.js";
+
 
 
 export async function listCommand(options: ListOptions): Promise<void> {

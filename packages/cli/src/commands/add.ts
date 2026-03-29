@@ -1,9 +1,9 @@
 import ora from "ora";
-
 import { findResource, loadRegistry } from "../registry.js";
 import { installSkill, installWorkflow } from "../installer.js";
 import { log } from "../utils/logger.js";
 import type { AddOptions, SkillEntry, WorkflowEntry } from "../types.js";
+
 
 
 export async function addCommand(
@@ -59,8 +59,7 @@ export async function addCommand(
       );
     }
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : String(error);
+    const message = error instanceof Error ? error.message : String(error);
 
     spinner.fail(`Failed to install "${name}": ${message}`);
   }

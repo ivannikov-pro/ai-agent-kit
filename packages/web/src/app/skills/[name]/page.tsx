@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 import { loadSkill, loadAllSkills } from "@/lib/data";
 import { CopyableCommand } from "@/components/CopyableCommand";
 
 
 
 export const dynamicParams = false;
+
 
 export function generateStaticParams() {
   const skills = loadAllSkills();
@@ -38,10 +38,10 @@ export async function generateMetadata({
 
   return {
     title: skill.name,
-    description: skill.description.split(".").slice(0, 2).join(".") + ".",
+    description: `${skill.description.split(".").slice(0, 2).join(".")}.`,
     openGraph: {
       title: `${skill.name} — ai-agent-kit skill`,
-      description: skill.description.split(".")[0] + ".",
+      description: `${skill.description.split(".")[0]}.`,
     },
   };
 }
@@ -147,7 +147,7 @@ export default async function SkillPage({
           <div className="text-[11px] text-[var(--color-text-muted)] mb-2 uppercase tracking-wider font-medium">
             Install this skill
           </div>
-          <CopyableCommand 
+          <CopyableCommand
             className="text-sm text-[var(--color-accent)]"
             command={`npx @ivannikov-pro/ai-agent-kit@latest add ${skill.name}`}
           />

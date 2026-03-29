@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 import { loadWorkflow, loadAllWorkflows } from "@/lib/data";
 import { CopyableCommand } from "@/components/CopyableCommand";
 
+
+
 export const dynamicParams = false;
+
 
 export function generateStaticParams() {
   const workflows = loadAllWorkflows();
@@ -35,10 +37,10 @@ export async function generateMetadata({
 
   return {
     title: workflow.name,
-    description: workflow.description.split(".").slice(0, 2).join(".") + ".",
+    description: `${workflow.description.split(".").slice(0, 2).join(".")}.`,
     openGraph: {
       title: `${workflow.name} — ai-agent-kit workflow`,
-      description: workflow.description.split(".")[0] + ".",
+      description: `${workflow.description.split(".")[0]}.`,
     },
   };
 }
@@ -100,7 +102,7 @@ export default async function WorkflowPage({
           <div className="text-[11px] text-[var(--color-text-muted)] mb-2 uppercase tracking-wider font-medium">
             Install this workflow
           </div>
-          <CopyableCommand 
+          <CopyableCommand
             className="text-sm text-[var(--color-accent)]"
             command={`npx @ivannikov-pro/ai-agent-kit@latest add ${workflow.name}`}
           />

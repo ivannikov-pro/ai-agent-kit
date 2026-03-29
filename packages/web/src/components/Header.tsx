@@ -57,9 +57,9 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] backdrop-blur-xl bg-[var(--color-background)]/85">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <Link 
-            href="https://ivannikov.pro" 
-            target="_blank" 
+          <Link
+            href="https://ivannikov.pro"
+            target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--color-text-dim)] hover:text-[var(--color-text)] transition-colors"
           >
@@ -71,7 +71,7 @@ export function Header() {
             <span className="text-lg font-bold tracking-tight text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
               AI-AGENT-KIT
             </span>
-            <span 
+            <span
               className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-[var(--color-accent-dim)] text-[var(--color-accent)] border border-[var(--color-accent)]/20 uppercase tracking-wider"
             >
               OSS

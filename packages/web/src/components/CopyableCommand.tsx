@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 
-interface CopyableCommandProps {
+
+
+type CopyableCommandProps = {
   command: string;
   className?: string;
   prefix?: string;
 }
+
 
 export function CopyableCommand({
   command,
@@ -39,10 +42,10 @@ export function CopyableCommand({
         </span>
       )}
       <span className="font-[var(--font-mono)]">{command}</span>
-      
-      <span 
+
+      <span
         className={`absolute right-3 flex items-center justify-center transition-all duration-200 ${
-          copied ? 'text-emerald-400 opacity-100 scale-110' : 'text-[var(--color-text-muted)] opacity-0 group-hover:opacity-100 scale-100'
+          copied ? "text-emerald-400 opacity-100 scale-110" : "text-[var(--color-text-muted)] opacity-0 group-hover:opacity-100 scale-100"
         }`}
       >
         {copied ? (

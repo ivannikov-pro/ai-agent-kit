@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-
 import { Header } from "@/components/Header";
 import { CopyableCommand } from "@/components/CopyableCommand";
 import { IconLogo } from "@/components/icons/IconLogo";
-
 import "./globals.css";
 
 

@@ -34,6 +34,7 @@ const typeConfig: Record<string, { color: string; bg: string; border: string; ca
   },
 };
 
+
 function ItemCard({
   href,
   name,
@@ -96,7 +97,7 @@ function ItemCard({
       )}
 
       <div className="mt-auto pt-5">
-        <CopyableCommand 
+        <CopyableCommand
           className={`text-xs bg-[var(--color-background)] border border-[var(--color-border)] px-3 py-1.5 rounded-md transition-colors inline-flex ${cfg.cmdText}`}
           command={command}
         />
@@ -174,22 +175,16 @@ export function HomeClient({
 
   const q = searchQuery.toLowerCase();
 
-  const filteredSkills = skills.filter((s) =>
-    s.name.toLowerCase().includes(q) ||
-    s.description.toLowerCase().includes(q) ||
-    (s.tags && s.tags.some(tag => tag.toLowerCase().includes(q)))
-  );
+  const filteredSkills = skills.filter((s) => s.name.toLowerCase().includes(q)
+    || s.description.toLowerCase().includes(q)
+    || (s.tags && s.tags.some((tag) => tag.toLowerCase().includes(q))));
 
-  const filteredMcp = mcpEntries.filter((m) =>
-    m.name.toLowerCase().includes(q) ||
-    m.description.toLowerCase().includes(q) ||
-    m.package.toLowerCase().includes(q)
-  );
+  const filteredMcp = mcpEntries.filter((m) => m.name.toLowerCase().includes(q)
+    || m.description.toLowerCase().includes(q)
+    || m.package.toLowerCase().includes(q));
 
-  const filteredWorkflows = workflowsEntries.filter((w) =>
-    w.name.toLowerCase().includes(q) ||
-    w.description.toLowerCase().includes(q)
-  );
+  const filteredWorkflows = workflowsEntries.filter((w) => w.name.toLowerCase().includes(q)
+    || w.description.toLowerCase().includes(q));
 
   return (
     <div className="max-w-6xl mx-auto px-6">
@@ -213,7 +208,7 @@ export function HomeClient({
           <p className="text-sm text-[var(--color-text-dim)] mb-6 max-w-xl mx-auto leading-relaxed">
             Run this command to initialize your workspace. It will create an <code className="bg-[var(--color-surface)] px-1.5 py-0.5 rounded text-[var(--color-text)]">.agents/</code> directory and prepare your project for AI agent skills.
           </p>
-          <CopyableCommand 
+          <CopyableCommand
             className="text-sm bg-[var(--color-background)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] px-6 py-3 rounded-xl text-[var(--color-accent)] transition-colors"
             command="npx @ivannikov-pro/ai-agent-kit@latest init"
           />

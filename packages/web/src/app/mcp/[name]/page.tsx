@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 import { loadMcp, loadAllMcp } from "@/lib/data";
 import { CopyableCommand } from "@/components/CopyableCommand";
 
+
+
 export const dynamicParams = false;
+
 
 export function generateStaticParams() {
   const mcps = loadAllMcp();
@@ -35,10 +37,10 @@ export async function generateMetadata({
 
   return {
     title: mcp.name,
-    description: mcp.description.split(".").slice(0, 2).join(".") + ".",
+    description: `${mcp.description.split(".").slice(0, 2).join(".")}.`,
     openGraph: {
       title: `${mcp.name} — ai-agent-kit mcp`,
-      description: mcp.description.split(".")[0] + ".",
+      description: `${mcp.description.split(".")[0]}.`,
     },
   };
 }
@@ -100,7 +102,7 @@ export default async function McpPage({
           <div className="text-[11px] text-[var(--color-text-muted)] mb-2 uppercase tracking-wider font-medium">
             Install this MCP package
           </div>
-          <CopyableCommand 
+          <CopyableCommand
             className="text-sm text-[var(--color-accent)]"
             command={`npm i ${mcp.package}`}
           />

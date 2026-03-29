@@ -1,6 +1,5 @@
 import { readFileSync, readdirSync, existsSync } from "fs";
 import { join } from "path";
-
 import matter from "gray-matter";
 
 
@@ -19,12 +18,14 @@ export type SkillData = {
   content: string;
 };
 
+
 export type WorkflowData = {
   name: string;
   description: string;
   source: string;
   content: string;
 };
+
 
 export type McpData = {
   name: string;
@@ -116,6 +117,7 @@ export function loadAllSkills(): SkillData[] {
   return skills;
 }
 
+
 export function loadWorkflow(name: string): WorkflowData | null {
   const registry = loadRegistry();
   const regData = registry.workflows[name];
@@ -143,10 +145,12 @@ export function loadWorkflow(name: string): WorkflowData | null {
   };
 }
 
+
 export function loadAllWorkflows(): WorkflowData[] {
   const registry = loadRegistry();
   return Object.keys(registry.workflows).map((name) => loadWorkflow(name)!).filter(Boolean);
 }
+
 
 export function loadMcp(name: string): McpData | null {
   const registry = loadRegistry();
@@ -174,6 +178,7 @@ export function loadMcp(name: string): McpData | null {
     content,
   };
 }
+
 
 export function loadAllMcp(): McpData[] {
   const registry = loadRegistry();

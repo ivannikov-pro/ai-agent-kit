@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-
 import type { RegistryConfig, ResourceInfo } from "./types.js";
+
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -23,7 +23,7 @@ export async function loadRegistry(): Promise<RegistryConfig> {
   // Try local registry: packages/cli/dist/ → monorepo root
   const localPaths = [
     join(__dirname, "..", "..", "..", "registry.json"), // from dist/ → root
-    join(__dirname, "..", "registry.json"),             // fallback: old layout
+    join(__dirname, "..", "registry.json"), // fallback: old layout
   ];
 
   for (const localPath of localPaths) {
@@ -40,8 +40,7 @@ export async function loadRegistry(): Promise<RegistryConfig> {
 
   // Fallback: fetch from GitHub
   {
-    const url =
-      "https://raw.githubusercontent.com/ivannikov-pro/ai-agent-kit/master/registry.json";
+    const url = "https://raw.githubusercontent.com/ivannikov-pro/ai-agent-kit/master/registry.json";
 
     const res = await fetch(url);
 
@@ -69,8 +68,7 @@ export async function listResources(filter?: {
   const registry = await loadRegistry();
   const resources: ResourceInfo[] = [];
 
-  const showAll =
-    !filter || (!filter.skills && !filter.workflows && !filter.mcp);
+  const showAll = !filter || (!filter.skills && !filter.workflows && !filter.mcp);
 
 
   if (showAll || filter?.skills) {
