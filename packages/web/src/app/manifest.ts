@@ -11,8 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "AI Agent Kit",
     start_url: ".",
     display: "standalone",
-    theme_color: "#000000",
-    background_color: "#ffffff",
+    theme_color: "#0a0a0f",
+    background_color: "#0a0a0f",
     icons: [
       {
         src: "android-icon-36x36.png",

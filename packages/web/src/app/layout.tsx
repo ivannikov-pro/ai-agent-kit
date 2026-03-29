@@ -7,7 +7,7 @@ import "./globals.css";
 
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0a0a0f",
   width: "device-width",
   initialScale: 1,
 };
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Aleksandr Ivannikov" }],
   other: {
     "msapplication-config": "browserconfig.xml",
-    "msapplication-TileColor": "#000000",
+    "msapplication-TileColor": "#0a0a0f",
     "msapplication-TileImage": "ms-icon-144x144.png",
   },
 };
