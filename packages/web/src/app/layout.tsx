@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { CopyableCommand } from "@/components/CopyableCommand";
 import { IconLogo } from "@/components/icons/IconLogo";
@@ -7,49 +6,80 @@ import "./globals.css";
 
 
 
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: {
-    default: "ai-agent-kit — AI Agent Toolkit by IVANNIKOV.PRO",
-    template: "%s | ai-agent-kit",
+  title: "AI Agent Kit",
+  description: "Professional AI agents and tools ecosystem",
+  metadataBase: new URL("https://ivannikov.pro"),
+  alternates: {
+    canonical: "/ai-agent-kit/",
   },
-  description:
-    "Browse and install curated AI agent skills, workflows, and MCP configs. Your open-source toolkit for AI-powered development.",
-  keywords: [
-    "ai-agent",
-    "agent-skills",
-    "mcp",
-    "ai-coding-assistant",
-    "developer-tools",
-    "workflows",
-    "ivannikov-pro",
-  ],
-  authors: [{ name: "Aleksandr Ivannikov", url: "https://ivannikov.pro" }],
-  creator: "IVANNIKOV.PRO",
-  metadataBase: new URL("https://ivannikov.pro/ai-agent-kit"),
   openGraph: {
+    title: "AI Agent Kit",
+    description: "Professional AI agents and tools ecosystem",
+    url: "https://ivannikov.pro/ai-agent-kit/",
+    siteName: "AI Agent Kit",
     type: "website",
-    locale: "en_US",
-    url: "https://ivannikov.pro/ai-agent-kit",
-    siteName: "ai-agent-kit",
-    title: "ai-agent-kit — AI Agent Toolkit",
-    description:
-      "Browse and install curated AI agent skills, workflows, and MCP configs for any AI coding assistant.",
+    images: [
+      {
+        url: "summary_large_image.png",
+        width: 1200,
+        height: 630,
+        alt: "AI Agent Kit - Professional AI agents and tools ecosystem",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ai-agent-kit — AI Agent Toolkit",
-    description:
-      "Open-source toolkit of curated skills, workflows, and MCP configs for AI coding assistants.",
+    creator: "@ivannikov_pro",
+    title: "AI Agent Kit",
+    description: "Professional AI agents and tools ecosystem",
+    images: [
+      {
+        url: "summary_large_image.png",
+        width: 1200,
+        height: 630,
+        alt: "AI Agent Kit - Professional AI agents and tools ecosystem",
+      },
+    ],
   },
   robots: {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: "favicon.ico", type: "image/x-icon" },
+      { url: "favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "android-icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "android-icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "apple-icon-57x57.png", sizes: "57x57" },
+      { url: "apple-icon-60x60.png", sizes: "60x60" },
+      { url: "apple-icon-72x72.png", sizes: "72x72" },
+      { url: "apple-icon-76x76.png", sizes: "76x76" },
+      { url: "apple-icon-114x114.png", sizes: "114x114" },
+      { url: "apple-icon-120x120.png", sizes: "120x120" },
+      { url: "apple-icon-144x144.png", sizes: "144x144" },
+      { url: "apple-icon-152x152.png", sizes: "152x152" },
+      { url: "apple-icon-180x180.png", sizes: "180x180" },
+    ],
+  },
+  authors: [{ name: "Aleksandr Ivannikov" }],
   other: {
-    "msapplication-config": "/browserconfig.xml",
+    "msapplication-config": "browserconfig.xml",
+    "msapplication-TileColor": "#000000",
+    "msapplication-TileImage": "ms-icon-144x144.png",
   },
 };
-
 
 
 export default function RootLayout({

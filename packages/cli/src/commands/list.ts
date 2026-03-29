@@ -8,7 +8,7 @@ export async function listCommand(options: ListOptions): Promise<void> {
   const resources = await listResources({
     skills: options.skills,
     workflows: options.workflows,
-    mcp: options.mcp,
+    mcp: options.mcp_servers,
   });
 
   if (resources.length === 0) {

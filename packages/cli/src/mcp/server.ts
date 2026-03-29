@@ -20,7 +20,7 @@ export async function startMcpServer(): Promise<void> {
     "List all available AI agent resources (skills, workflows, MCP configs)",
     {
       type: z
-        .enum(["skill", "workflow", "mcp"])
+        .enum(["skill", "workflow", "mcp server"])
         .optional()
         .describe("Filter by resource type"),
     },
@@ -29,7 +29,7 @@ export async function startMcpServer(): Promise<void> {
         ? {
           skills: type === "skill",
           workflows: type === "workflow",
-          mcp: type === "mcp",
+          mcp: type === "mcp server",
         }
         : undefined;
 
@@ -98,7 +98,7 @@ export async function startMcpServer(): Promise<void> {
         };
       }
 
-      if (result.type === "mcp") {
+      if (result.type === "mcp server") {
         return {
           content: [
             {

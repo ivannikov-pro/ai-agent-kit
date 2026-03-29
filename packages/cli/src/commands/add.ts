@@ -22,7 +22,7 @@ export async function addCommand(
       const allNames = [
         ...Object.keys(registry.skills),
         ...Object.keys(registry.workflows),
-        ...Object.keys(registry.mcp),
+        ...Object.keys(registry.mcp_servers),
       ];
 
       if (allNames.length > 0) {
@@ -53,7 +53,7 @@ export async function addCommand(
       );
 
       spinner.succeed(`Workflow "${name}" installed to ${targetDir}`);
-    } else if (result.type === "mcp") {
+    } else if (result.type === "mcp server") {
       spinner.info(
         `"${name}" is an MCP package. Install via: npm install ${(result.entry as { package: string }).package}`,
       );

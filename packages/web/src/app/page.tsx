@@ -14,10 +14,10 @@ export default function HomePage() {
   const skills = loadAllSkills();
   const registry = loadRegistry();
 
-  const mcpEntries: MCPEntry[] = Object.entries(registry.mcp).map(
+  const mcpEntries: MCPEntry[] = Object.entries(registry.mcp_servers || {}).map(
     ([name, entry]) => ({
       name,
-      type: "mcp",
+      type: "mcp server",
       description: entry.description,
       package: entry.package,
     })

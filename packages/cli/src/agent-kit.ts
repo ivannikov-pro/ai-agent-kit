@@ -30,7 +30,7 @@ export class AgentKit {
    */
   async find(
     name: string,
-  ): Promise<{ type: "skill" | "workflow" | "mcp"; entry: unknown } | null> {
+  ): Promise<{ type: "skill" | "workflow" | "mcp server"; entry: unknown } | null> {
     return findResource(name);
   }
 

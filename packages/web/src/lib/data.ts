@@ -47,7 +47,7 @@ export type RegistryData = {
     }
   >;
   workflows: Record<string, { source: string; description: string }>;
-  mcp: Record<string, { package: string; description: string }>;
+  mcp_servers: Record<string, { package: string; description: string }>;
 };
 
 
@@ -154,13 +154,13 @@ export function loadAllWorkflows(): WorkflowData[] {
 
 export function loadMcp(name: string): McpData | null {
   const registry = loadRegistry();
-  const regData = registry.mcp[name];
+  const regData = registry.mcp_servers?.[name];
 
   if (!regData) {
     return null;
   }
 
-  const mcpDir = join(getProjectRoot(), "mcp", name);
+  const mcpDir = join(getProjectRoot(), "mcp server", name);
   const mdPath = join(mcpDir, "MCP.md");
 
   let content = regData.description;
@@ -182,5 +182,5 @@ export function loadMcp(name: string): McpData | null {
 
 export function loadAllMcp(): McpData[] {
   const registry = loadRegistry();
-  return Object.keys(registry.mcp).map((name) => loadMcp(name)!).filter(Boolean);
+  return Object.keys(registry.mcp_servers || {}).map((name) => loadMcp(name)!).filter(Boolean);
 }

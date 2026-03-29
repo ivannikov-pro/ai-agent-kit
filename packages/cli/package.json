@@ -5,8 +5,11 @@
   "keywords": [
     "ai-agent",
     "agent-skills",
-    "cli",
-    "mcp"
+    "skills",
+    "workflows",
+    "mcp",
+    "mcp-server",
+    "cli"
   ],
   "private": false,
   "publishConfig": {

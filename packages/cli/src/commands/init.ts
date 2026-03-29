@@ -1,9 +1,7 @@
 import chalk from "chalk";
 import { listResources, loadRegistry } from "../registry.js";
-import { installSkill } from "../installer.js";
 import { log } from "../utils/logger.js";
 import { dirExists, getSkillsDir } from "../utils/fs.js";
-import type { SkillEntry } from "../types.js";
 
 
 

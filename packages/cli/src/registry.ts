@@ -68,7 +68,7 @@ export async function listResources(filter?: {
   const registry = await loadRegistry();
   const resources: ResourceInfo[] = [];
 
-  const showAll = !filter || (!filter.skills && !filter.workflows && !filter.mcp);
+  const showAll = !filter || (!filter.skills && !filter.workflows && !filter.mcp_servers);
 
 
   if (showAll || filter?.skills) {
@@ -96,11 +96,11 @@ export async function listResources(filter?: {
   }
 
 
-  if (showAll || filter?.mcp) {
-    for (const [name, entry] of Object.entries(registry.mcp)) {
+  if (showAll || filter?.mcp_servers) {
+    for (const [name, entry] of Object.entries(registry.mcp_servers)) {
       resources.push({
         name,
-        type: "mcp",
+        type: "mcp server",
         description: entry.description,
         source: entry.package,
       });
@@ -116,7 +116,7 @@ export async function listResources(filter?: {
  */
 export async function findResource(
   name: string,
-): Promise<{ type: "skill" | "workflow" | "mcp"; entry: unknown } | null> {
+): Promise<{ type: "skill" | "workflow" | "mcp server"; entry: unknown } | null> {
   const registry = await loadRegistry();
 
   if (registry.skills[name]) {
@@ -127,8 +127,8 @@ export async function findResource(
     return { type: "workflow", entry: registry.workflows[name] };
   }
 
-  if (registry.mcp[name]) {
-    return { type: "mcp", entry: registry.mcp[name] };
+  if (registry.mcp_servers[name]) {
+    return { type: "mcp server", entry: registry.mcp_servers[name] };
   }
 
   return null;

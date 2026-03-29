@@ -46,7 +46,7 @@ function ItemCard({
 }: {
   href: string;
   name: string;
-  type: "skill" | "workflow" | "mcp";
+  type: "skill" | "workflow" | "mcp server";
   description: string;
   tags?: string[];
   tools?: string[];
@@ -148,7 +148,7 @@ function Badge({
 
 export type MCPEntry = {
   name: string;
-  type: "mcp";
+  type: "mcp server";
   description: string;
   package: string;
 };
@@ -243,7 +243,7 @@ export function HomeClient({
       <section className="grid grid-cols-3 gap-4 mb-20 max-w-md mx-auto animate-fade-in-up-delay-1">
         <StatCard value={skills.length} label="Skills" color="text-cyan-400" />
         <StatCard value={workflowsEntries.length} label="Workflows" color="text-purple-400" />
-        <StatCard value={mcpEntries.length} label="MCP" color="text-emerald-400" />
+        <StatCard value={mcpEntries.length} label="MCP Servers" color="text-emerald-400" />
       </section>
 
       {/* ─── Nothing Found State ─── */}
@@ -319,7 +319,7 @@ export function HomeClient({
 
       {/* ─── MCP Configs ─── */}
       {filteredMcp.length > 0 && (
-        <section className="scroll-mt-24 mb-20 animate-fade-in-up-delay-3" id="mcp">
+        <section className="scroll-mt-24 mb-20 animate-fade-in-up-delay-3" id="mcp_servers">
           <div className="flex items-center gap-3 mb-8">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <h2 className="text-2xl font-semibold">MCP Configs</h2>
@@ -334,9 +334,9 @@ export function HomeClient({
                 key={entry.name}
                 href={`/mcp/${entry.name}`}
                 name={entry.name}
-                type="mcp"
+                type="mcp server"
                 description={entry.description}
-                tags={["mcp", "server"]}
+                tags={["mcp server"]}
                 tools={[entry.package.split("/").pop()!]}
                 command={`npm i ${entry.package}`}
               />
