@@ -1,0 +1,7 @@
+echo "Running checks before commit..."
+
+# Validate AI agent skills, workflows, and MCP configurations
+pnpm run registry:validate
+
+# Run monorepo-wide linting backed by turborepo cache
+pnpm turbo run lint

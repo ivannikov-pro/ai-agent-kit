@@ -34,6 +34,15 @@
               },
               "description": "List of keywords categorizing the skill"
             },
+            "category": {
+              "type": "string",
+              "description": "The category of the skill"
+            },
+            "risk": {
+              "type": "string",
+              "enum": ["none", "safe", "critical", "offensive", "unknown"],
+              "description": "The risk level of the skill"
+            },
             "version": {
               "type": "string",
               "description": "The semantic version of the skill"
@@ -41,7 +50,8 @@
           },
           "required": [
             "source",
-            "description"
+            "description",
+            "category"
           ],
           "additionalProperties": false
         }
@@ -69,11 +79,16 @@
                 "type": "string"
               },
               "description": "List of keywords categorizing the workflow"
+            },
+            "category": {
+              "type": "string",
+              "description": "The category of the workflow"
             }
           },
           "required": [
             "source",
-            "description"
+            "description",
+            "category"
           ],
           "additionalProperties": false
         }

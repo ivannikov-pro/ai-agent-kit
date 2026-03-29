@@ -7,7 +7,9 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "update-registry": "node scripts/update-registry.mjs"
+    "registry:build": "node scripts/update-registry.mjs",
+    "registry:validate": "node scripts/update-registry.mjs --strict",
+    "prepare": "husky"
   },
   "keywords": [
     "ai-agent",
@@ -29,6 +31,12 @@
   },
   "packageManager": "pnpm@9.15.9",
   "devDependencies": {
+    "husky": "^9.1.7",
+    "js-yaml": "^4.1.1",
+    "lint-staged": "^16.4.0",
     "turbo": "^2.5.4"
+  },
+  "lint-staged": {
+    "*.{ts,js,mjs,tsx,jsx}": "eslint --fix"
   }
 }
