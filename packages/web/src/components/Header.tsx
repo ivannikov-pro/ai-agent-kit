@@ -96,11 +96,11 @@ export function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
-          {NAV_LINKS.map(link => (
+          {NAV_LINKS.map((link) => (
             <NavLink key={link.href} href={link.href}>{link.label}</NavLink>
           ))}
-          
-          {EXTERNAL_LINKS.slice(1).map(link => (
+
+          {EXTERNAL_LINKS.slice(1).map((link) => (
             <NavLink key={link.href} href={link.href} external>
               <span className="flex items-center gap-1.5">
                 <link.Icon className="w-4 h-4" />
@@ -128,15 +128,15 @@ export function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white border-t border-slate-200 p-6 z-40">
           <nav className="flex flex-col gap-6">
-            {NAV_LINKS.map(link => (
+            {NAV_LINKS.map((link) => (
               <NavLink key={link.href} href={link.href} onClick={() => setIsMobileMenuOpen(false)}>
                 {link.label}
               </NavLink>
             ))}
 
             <div className="h-px bg-slate-200 w-full my-2"></div>
-            
-            {EXTERNAL_LINKS.map(link => (
+
+            {EXTERNAL_LINKS.map((link) => (
               <NavLink key={link.href} href={link.href} external>
                 <span className="flex items-center gap-2">
                   <link.Icon className="w-5 h-5" />
