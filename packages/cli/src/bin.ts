@@ -13,23 +13,23 @@ const program = new Command();
 program
   .name("ai-agent-kit")
   .description(
-    "CLI + MCP server for installing AI agent skills, workflows, and MCP configs",
+    "Build Custom AI Agents Faster. By Aleksandr Ivannikov | Open Source (ivannikov.pro)",
   )
   .version("0.1.0");
 
 
 program
   .command("list")
-  .description("List available resources from the registry")
+  .description("List available expert skills, workflows, and MCP servers")
   .option("-s, --skills", "Show only skills")
   .option("-w, --workflows", "Show only workflows")
-  .option("-m, --mcp", "Show only MCP configs")
+  .option("-m, --mcp", "Show only MCP servers")
   .action(listCommand);
 
 
 program
   .command("add")
-  .description("Install a skill or workflow into the current project")
+  .description("Install production-ready skills or workflows into your project")
   .argument("<name>", "Name of the resource to install")
   .option("-w, --workflow", "Install as workflow")
   .option("-g, --global", "Install globally (~/.agents/)")
@@ -46,13 +46,13 @@ program
 
 program
   .command("init")
-  .description("Initialize AI agent resources for this project")
+  .description("Initialize advanced AI agent capabilities for your project")
   .action(initCommand);
 
 
 program
   .command("mcp")
-  .description("Start as MCP server (stdio transport)")
+  .description("Start the MCP server to integrate with AI tools")
   .action(startMcpServer);
 
 

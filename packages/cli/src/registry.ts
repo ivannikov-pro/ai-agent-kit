@@ -68,7 +68,7 @@ export async function listResources(filter?: {
   const registry = await loadRegistry();
   const resources: ResourceInfo[] = [];
 
-  const showAll = !filter || (!filter.skills && !filter.workflows && !filter.mcp_servers);
+  const showAll = !filter || (!filter.skills && !filter.workflows && !filter.mcp);
 
 
   if (showAll || filter?.skills) {
@@ -96,7 +96,7 @@ export async function listResources(filter?: {
   }
 
 
-  if (showAll || filter?.mcp_servers) {
+  if (showAll || filter?.mcp) {
     for (const [name, entry] of Object.entries(registry.mcp_servers)) {
       resources.push({
         name,

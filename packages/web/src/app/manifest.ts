@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 
 
@@ -11,8 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "AI Agent Kit",
     start_url: ".",
     display: "standalone",
-    theme_color: "#0a0a0f",
-    background_color: "#0a0a0f",
+    theme_color: "#ffffff",
+    background_color: "#ffffff",
     icons: [
       {
         src: "android-icon-36x36.png",
@@ -48,7 +48,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "android-icon-512x512.png",
         sizes: "512x512",
         type: "image/png",
-      }
-    ]
-  }
-};
+      },
+    ],
+  };
+}

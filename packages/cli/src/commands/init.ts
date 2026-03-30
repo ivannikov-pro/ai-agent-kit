@@ -7,8 +7,10 @@ import { dirExists, getSkillsDir } from "../utils/fs.js";
 
 export async function initCommand(): Promise<void> {
   console.log();
-  console.log(chalk.bold("🛠️  ai-agent-kit init"));
-  console.log(chalk.dim("  Setting up AI agent resources for this project"));
+  console.log(chalk.bold("🚀 ai-agent-kit init"));
+  console.log(
+    chalk.dim("  Setting up advanced AI agent capabilities for your project"),
+  );
   console.log();
 
 
@@ -19,7 +21,7 @@ export async function initCommand(): Promise<void> {
   if (hasSkillsDir) {
     log.info("Found existing .agents/skills/ directory");
   } else {
-    log.info("No .agents/skills/ directory found — will create it");
+    log.info("Creating .agents/skills/ directory to store expert workflows...");
   }
 
 
@@ -28,7 +30,7 @@ export async function initCommand(): Promise<void> {
   const registry = await loadRegistry();
 
   console.log();
-  console.log(chalk.bold("  Available skills to install:"));
+  console.log(chalk.bold("  Available expert capabilities to install:"));
   console.log();
 
 
@@ -63,6 +65,14 @@ export async function initCommand(): Promise<void> {
 
 
   console.log();
-  log.success("Init complete. Your project is ready for AI agents!");
+  log.success(
+    "Init complete. Your project is now equipped for advanced AI agent workflows!",
+  );
+  console.log();
+  console.log(
+    chalk.dim(
+      "Need a custom AI solution? Book a consultation at https://ivannikov.pro",
+    ),
+  );
   console.log();
 }
