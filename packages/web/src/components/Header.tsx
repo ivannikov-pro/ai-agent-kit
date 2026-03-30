@@ -36,6 +36,17 @@ function NavLink({
   );
 }
 
+const NAV_LINKS = [
+  { href: "/#skills", label: "Skills" },
+  { href: "/#workflows", label: "Workflows" },
+  { href: "/#mcp", label: "MCP Server" },
+];
+
+const EXTERNAL_LINKS = [
+  { href: "https://ivannikov.pro", label: "IVANNIKOV.PRO", Icon: IconLogo },
+  { href: "https://github.com/ivannikov-pro/ai-agent-kit", label: "GitHub", Icon: IconGitHub },
+  { href: "https://www.npmjs.com/package/@ivannikov-pro/ai-agent-kit", label: "npm", Icon: IconNpm },
+];
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -85,28 +96,18 @@ export function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
-          <NavLink href="/#skills">Skills</NavLink>
-          <NavLink href="/#workflows">Workflows</NavLink>
-          <NavLink href="/#mcp">MCP</NavLink>
-
-          <NavLink
-            href="https://github.com/ivannikov-pro/ai-agent-kit"
-            external
-          >
-            <span className="flex items-center gap-1.5">
-              <IconGitHub className="w-4 h-4" />
-              GitHub
-            </span>
-          </NavLink>
-          <NavLink
-            href="https://www.npmjs.com/package/@ivannikov-pro/ai-agent-kit"
-            external
-          >
-            <span className="flex items-center gap-1.5">
-              <IconNpm className="w-4 h-4" />
-              npm
-            </span>
-          </NavLink>
+          {NAV_LINKS.map(link => (
+            <NavLink key={link.href} href={link.href}>{link.label}</NavLink>
+          ))}
+          
+          {EXTERNAL_LINKS.slice(1).map(link => (
+            <NavLink key={link.href} href={link.href} external>
+              <span className="flex items-center gap-1.5">
+                <link.Icon className="w-4 h-4" />
+                {link.label}
+              </span>
+            </NavLink>
+          ))}
         </nav>
 
         {/* Mobile Hamburger */}
@@ -127,35 +128,22 @@ export function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white border-t border-slate-200 p-6 z-40">
           <nav className="flex flex-col gap-6">
-            <NavLink href="/#skills" onClick={() => setIsMobileMenuOpen(false)}>
-              Skills
-            </NavLink>
-            <NavLink href="/#workflows" onClick={() => setIsMobileMenuOpen(false)}>
-              Workflows
-            </NavLink>
-            <NavLink href="/#mcp" onClick={() => setIsMobileMenuOpen(false)}>
-              MCP
-            </NavLink>
+            {NAV_LINKS.map(link => (
+              <NavLink key={link.href} href={link.href} onClick={() => setIsMobileMenuOpen(false)}>
+                {link.label}
+              </NavLink>
+            ))}
 
             <div className="h-px bg-slate-200 w-full my-2"></div>
-            <NavLink href="https://ivannikov.pro" external>
-              <span className="flex items-center gap-2">
-                <IconLogo className="w-5 h-5" />
-                IVANNIKOV.PRO
-              </span>
-            </NavLink>
-            <NavLink href="https://github.com/ivannikov-pro/ai-agent-kit" external>
-              <span className="flex items-center gap-2">
-                <IconGitHub className="w-4 h-4" />
-                GitHub
-              </span>
-            </NavLink>
-            <NavLink href="https://www.npmjs.com/package/@ivannikov-pro/ai-agent-kit" external>
-              <span className="flex items-center gap-2">
-                <IconNpm className="w-4 h-4" />
-                npm
-              </span>
-            </NavLink>
+            
+            {EXTERNAL_LINKS.map(link => (
+              <NavLink key={link.href} href={link.href} external>
+                <span className="flex items-center gap-2">
+                  <link.Icon className="w-5 h-5" />
+                  {link.label}
+                </span>
+              </NavLink>
+            ))}
           </nav>
         </div>
       )}
