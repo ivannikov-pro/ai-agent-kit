@@ -1,6 +1,6 @@
 {
   "name": "@ivannikov-pro/ai-agent-kit",
-  "description": "CLI + MCP server for installing AI agent skills, workflows, and MCP configs",
+  "description": "Build Custom AI Agents Faster. By Aleksandr Ivannikov | Open Source",
   "version": "0.1.0",
   "keywords": [
     "ai-agent",

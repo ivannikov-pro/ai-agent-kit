@@ -2,26 +2,29 @@ import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { CopyableCommand } from "@/components/CopyableCommand";
 import { IconLogo } from "@/components/icons/IconLogo";
+import { ConversionBanner } from "@/components/ConversionBanner";
+import { getExternalLinkProps } from "@/utils/getExternalLinkProps";
 import "./globals.css";
 
 
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
 
+
 export const metadata: Metadata = {
-  title: "AI Agent Kit",
-  description: "Professional AI agents and tools ecosystem",
+  title: "AI Agent Kit by Aleksandr Ivannikov",
+  description: "Accelerate your AI development with production-ready agent skills, workflows, and MCP configs.",
   metadataBase: new URL("https://ivannikov.pro"),
   alternates: {
     canonical: "/ai-agent-kit/",
   },
   openGraph: {
-    title: "AI Agent Kit",
-    description: "Professional AI agents and tools ecosystem",
+    title: "AI Agent Kit by Aleksandr Ivannikov",
+    description: "Accelerate your AI development with production-ready agent skills, workflows, and MCP configs.",
     url: "https://ivannikov.pro/ai-agent-kit/",
     siteName: "AI Agent Kit",
     type: "website",
@@ -37,8 +40,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@ivannikov_pro",
-    title: "AI Agent Kit",
-    description: "Professional AI agents and tools ecosystem",
+    title: "AI Agent Kit by Aleksandr Ivannikov",
+    description: "Accelerate your AI development with production-ready agent skills, workflows, and MCP configs.",
     images: [
       {
         url: "summary_large_image.png",
@@ -76,7 +79,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Aleksandr Ivannikov" }],
   other: {
     "msapplication-config": "browserconfig.xml",
-    "msapplication-TileColor": "#000000",
+    "msapplication-TileColor": "#ffffff",
     "msapplication-TileImage": "ms-icon-144x144.png",
   },
 };
@@ -100,6 +103,35 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://ivannikov.pro/#person",
+                  name: "Aleksandr Ivannikov",
+                  url: "https://ivannikov.pro",
+                  sameAs: [
+                    "https://github.com/ivannikov-pro"
+                  ],
+                  jobTitle: "Full-Stack Web3 & AI Developer"
+                },
+                {
+                  "@type": "SoftwareSourceCode",
+                  "@id": "https://ivannikov.pro/ai-agent-kit/#software",
+                  name: "AI Agent Kit",
+                  author: { "@id": "https://ivannikov.pro/#person" },
+                  description: "A curated collection of skills, workflows, and MCP configs for developers.",
+                  programmingLanguage: ["TypeScript", "JavaScript"],
+                  codeRepository: "https://github.com/ivannikov-pro/ai-agent-kit"
+                }
+              ]
+            })
+          }}
+        />
       </head>
 
       <body className="min-h-screen flex flex-col relative">
@@ -108,45 +140,45 @@ export default function RootLayout({
         {/* ─── Content ─── */}
         <main className="flex-1 relative z-10">{children}</main>
 
+        <ConversionBanner />
+
         {/* ─── Footer ─── */}
-        <footer className="relative z-10 border-t border-[var(--color-border)] mt-24">
+        <footer className="relative z-10 border-t border-slate-200 mt-24">
           <div className="max-w-6xl mx-auto px-6 py-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-6">
                 <a
                   href="https://ivannikov.pro"
-                  className="flex items-center gap-2 text-[var(--color-text-dim)] hover:text-[var(--color-accent)] transition-colors text-sm font-medium"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-slate-500 hover:text-indigo-500 transition-colors text-sm font-medium"
+                  {...getExternalLinkProps()}
                 >
                   <IconLogo className="w-5 h-5" />
                   IVANNIKOV.PRO
                 </a>
                 <a
                   href="https://github.com/ivannikov-pro"
-                  className="text-[var(--color-text-dim)] hover:text-[var(--color-text)] transition-colors text-sm"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-900 transition-colors text-sm"
+                  {...getExternalLinkProps()}
                 >
                   GitHub
                 </a>
               </div>
 
-              <div className="flex items-center gap-3 text-[var(--color-text-muted)] text-sm">
+              <div className="flex items-center gap-3 text-slate-400 text-sm">
                 <span>Install →</span>
                 <CopyableCommand
-                  className="text-xs bg-[var(--color-surface)] border border-[var(--color-border)] px-3 py-1 rounded-md text-[var(--color-accent)]"
+                  className="text-xs bg-slate-50 border border-slate-200 px-3 py-1 rounded-md text-indigo-500"
                   command="npx @ivannikov-pro/ai-agent-kit@latest"
                   prefix=""
                 />
               </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-[var(--color-border)] flex flex-col gap-4 items-center justify-between md:flex-row">
-              <div className="text-[var(--color-text-muted)] text-xs">
+            <div className="mt-6 pt-6 border-t border-slate-200 flex flex-col gap-4 items-center justify-between md:flex-row">
+              <div className="text-slate-400 text-xs">
                 © {new Date().getFullYear()} IVANNIKOV.PRO
               </div>
-              <div className="inline-flex items-center gap-2 text-xs text-[var(--color-text-muted)] border border-[var(--color-border)] rounded-full px-4 py-1.5">
+              <div className="inline-flex items-center gap-2 text-xs text-slate-400 border border-slate-200 rounded-full px-4 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 OSS (Open Source Software) · MIT Licensed
               </div>

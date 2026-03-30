@@ -23,7 +23,7 @@
     "email": "hi@ivannikov.pro"
   },
   "scripts": {
-    "dev": "next dev -p 3100",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src/"
@@ -40,6 +40,7 @@
   "devDependencies": {
     "@ivannikov-pro/config-eslint": "workspace:*",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

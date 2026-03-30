@@ -42,7 +42,9 @@ export async function addCommand(
         options,
       );
 
-      spinner.succeed(`Skill "${name}" installed to ${targetDir}`);
+      spinner.succeed(
+        `Expert skill "${name}" successfully integrated into ${targetDir}`,
+      );
     } else if (result.type === "workflow") {
       spinner.text = `Installing workflow "${name}"...`;
 
@@ -52,7 +54,9 @@ export async function addCommand(
         options,
       );
 
-      spinner.succeed(`Workflow "${name}" installed to ${targetDir}`);
+      spinner.succeed(
+        `Production workflow "${name}" successfully integrated into ${targetDir}`,
+      );
     } else if (result.type === "mcp server") {
       spinner.info(
         `"${name}" is an MCP package. Install via: npm install ${(result.entry as { package: string }).package}`,

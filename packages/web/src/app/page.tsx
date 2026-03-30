@@ -20,11 +20,11 @@ export default function HomePage() {
       type: "mcp server",
       description: entry.description,
       package: entry.package,
-    })
+    }),
   );
 
   const workflowsEntries: WorkflowEntry[] = Object.entries(
-    registry.workflows
+    registry.workflows,
   ).map(([name, entry]) => ({
     name,
     type: "workflow",
