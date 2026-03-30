@@ -1,3 +1,7 @@
+import { ConsultationButton } from "./ConsultationButton";
+
+
+
 export function ConversionBanner() {
   return (
     <section className="py-20 px-6 mt-16 bg-slate-50 border-t border-slate-200 relative z-10">
@@ -8,14 +12,9 @@ export function ConversionBanner() {
         <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
           From integrating local workflows to building autonomous enterprise agents, I help companies turn AI potential into revenue. Let's discuss your project.
         </p>
-        <a
-          href="https://ivannikov.pro/services/consultation"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-8 py-4 rounded-xl transition-colors shadow-sm"
-        >
+        <ConsultationButton className="px-8 py-4">
           Book a Discovery Call
-        </a>
+        </ConsultationButton>
       </div>
     </section>
   );

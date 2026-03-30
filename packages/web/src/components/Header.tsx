@@ -8,6 +8,7 @@ import { IconGitHub } from "./icons/IconGitHub";
 import { IconNpm } from "./icons/IconNpm";
 import { IconMenu } from "./icons/IconMenu";
 import { IconClose } from "./icons/IconClose";
+import { getExternalLinkProps } from "../utils/getExternalLinkProps";
 
 
 
@@ -28,7 +29,7 @@ function NavLink({
       className="text-slate-500 hover:text-slate-900 transition-colors text-sm font-medium"
       onClick={onClick}
       {...(external
-        ? { target: "_blank", rel: "noopener noreferrer" }
+        ? getExternalLinkProps()
         : {})}
     >
       {children}
@@ -39,7 +40,7 @@ function NavLink({
 const NAV_LINKS = [
   { href: "/#skills", label: "Skills" },
   { href: "/#workflows", label: "Workflows" },
-  { href: "/#mcp", label: "MCP Server" },
+  { href: "/#mcp", label: "MCP Servers" },
 ];
 
 const EXTERNAL_LINKS = [
@@ -74,8 +75,7 @@ export function Header() {
         <div className="flex items-center gap-2.5">
           <Link
             href="https://ivannikov.pro"
-            target="_blank"
-            rel="noopener noreferrer"
+            {...getExternalLinkProps()}
             className="hidden sm:flex items-center gap-2 text-lg font-bold tracking-tight text-slate-500 hover:text-slate-900 transition-colors"
           >
             <IconLogo className="w-5 h-5" />
@@ -99,7 +99,9 @@ export function Header() {
           {NAV_LINKS.map((link) => (
             <NavLink key={link.href} href={link.href}>{link.label}</NavLink>
           ))}
+        </nav>
 
+        <div className="hidden md:flex items-center gap-6">
           {EXTERNAL_LINKS.slice(1).map((link) => (
             <NavLink key={link.href} href={link.href} external>
               <span className="flex items-center gap-1.5">
@@ -108,7 +110,7 @@ export function Header() {
               </span>
             </NavLink>
           ))}
-        </nav>
+        </div>
 
         {/* Mobile Hamburger */}
         <button

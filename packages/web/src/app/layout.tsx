@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { CopyableCommand } from "@/components/CopyableCommand";
 import { IconLogo } from "@/components/icons/IconLogo";
 import { ConversionBanner } from "@/components/ConversionBanner";
+import { getExternalLinkProps } from "@/utils/getExternalLinkProps";
 import "./globals.css";
 
 
@@ -149,8 +150,7 @@ export default function RootLayout({
                 <a
                   href="https://ivannikov.pro"
                   className="flex items-center gap-2 text-slate-500 hover:text-indigo-500 transition-colors text-sm font-medium"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...getExternalLinkProps()}
                 >
                   <IconLogo className="w-5 h-5" />
                   IVANNIKOV.PRO
@@ -158,8 +158,7 @@ export default function RootLayout({
                 <a
                   href="https://github.com/ivannikov-pro"
                   className="text-slate-500 hover:text-slate-900 transition-colors text-sm"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...getExternalLinkProps()}
                 >
                   GitHub
                 </a>

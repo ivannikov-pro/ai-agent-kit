@@ -9,7 +9,7 @@ import { ItemCard } from "./ItemCard";
 import { StatCard } from "./StatCard";
 import { CategorySection } from "./CategorySection";
 import { IconSearch } from "./icons/IconSearch";
-
+import { ConsultationButton } from "./ConsultationButton";
 
 
 export type MCPEntry = {
@@ -83,9 +83,9 @@ export function HomeClient({
               className="text-sm bg-white border border-slate-200 hover:border-slate-300 px-6 py-3 rounded-xl text-indigo-500 transition-colors w-full md:w-auto"
               command="npx @ivannikov-pro/ai-agent-kit@latest init"
             />
-            <a href="https://ivannikov.pro/services/consultation" target="_blank" rel="noopener noreferrer" className="text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl transition-colors font-medium w-full md:w-auto text-center border border-transparent shadow-sm">
+            <ConsultationButton className="text-sm px-6 py-3 w-full md:w-auto">
               Book a Consultation
-            </a>
+            </ConsultationButton>
           </div>
           <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
              Run this command in any repository to create an <code className="bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-900">.agents/</code> directory and prepare your project for AI agent skills.
